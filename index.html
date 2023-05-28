@@ -1,0 +1,150 @@
+<!--
+    Author: Alan Henry
+    A web page that shows the weather from weatherapi.com
+-->
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Import Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page title -->
+    <title>Weather API</title>
+</head>
+<body>
+    <!-- Title and search container -->
+    <div class="container my-5">
+        <div class="p-5 text-center bg-body-tertiary rounded-3">
+
+            <h1 class="text-body-emphasis">Weather API</h1>
+
+            <p class="col-lg-8 mx-auto fs-5 mt-5 mb-4 text-muted">
+                Search for your location below to display today's weather.
+            </p>
+
+            <!-- Search for location -->
+            <div class="col-lg-5 mx-auto mb-5">
+                <form>
+                    <div class="input-group">
+                        <input type="search" class="form-control rounded" id="search-field" placeholder="Search for a location" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-primary rounded" id="search-button">Search</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Weather container -->
+    <div class="container my-5">
+        <div class="p-5 text-start bg-body-tertiary rounded-3">
+            <!-- Weather data section -->
+            <div class="col-lg-12 me-auto fs-5 mt-4 mb-4 text-body-emphasis">
+                <!-- Displays the location name from jsonData.location.name -->
+                <h2 class="">Current weather for <span class="location-name">London</span>, <span class="location-country">UK</span></h2> 
+            </div>
+            <div class="row">
+                <div class="col-lg-6 me-auto fs-5 text-muted">
+                    <!-- Weather data fields -->
+                    <h3 class="p-condition-text mb-3"><span class="condition-text"></span></h3>
+                    <p class="p-temperature">Temperature: <span class="temperature"></span>&degC</p>
+                    <p class="p-humidity">Humidity: <span class="humidity"></span>%</p>
+                    <p class="p-precipitation">Precipitation: <span class="precipitation"></span> mm</p>
+                    <p class="p-pressure">Pressure: <span class="pressure"></span> mm</p>
+                    <p class="p-wind">Wind: <span class="wind"></span> mph</p>
+                </div>
+                <div class="col-lg-6 ms-auto fs-5 text-muted">
+                    <img class="condition-icon-large" src="" alt="Weather icon">
+                </div>
+            </div>
+            <!-- Hidden customise section -->
+            <div class="col-lg-6 me-auto mt-5 text-muted">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#customise" aria-expanded="false" aria-controls="customise">
+                    Customise fields
+                </button>
+                <div class="collapse" id="customise">
+                    <div class="card card-body">
+                        <h5 class="text-body-emphasis mt-1 mb-3">Turn data fields on or off using the checkboxes below:</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-temperature" checked>
+                            <label class="form-check-label" for="check-temperature">
+                                Temperature
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-humidity" checked>
+                            <label class="form-check-label" for="check-humidity">
+                                Humidity
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-precipitation" checked>
+                            <label class="form-check-label" for="check-precipitation">
+                                Precipitation
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-pressure" checked>
+                            <label class="form-check-label" for="check-pressure">
+                                Pressure
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-wind" checked>
+                            <label class="form-check-label" for="check-wind">
+                                Wind
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer container -->
+    <div class="container my-5">
+        <div class="p-5 text-start bg-body-tertiary rounded-3">
+            <p>
+                Created by Alan Henry using the <a href="https://www.weatherapi.com/" target="_blank">www.weatherapi.com</a> API.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <!-- jQuery script -->
+    <script>
+        $(document).ready(function(){
+            $("#check-temperature").click(function(){
+                $(".p-temperature").toggle();
+            });
+            $("#check-humidity").click(function(){
+                $(".p-humidity").toggle();
+            });
+            $("#check-precipitation").click(function(){
+                $(".p-precipitation").toggle();
+            });
+            $("#check-pressure").click(function(){
+                $(".p-pressure").toggle();
+            });
+            $("#check-wind").click(function(){
+                $(".p-wind").toggle();
+            });
+        });
+    </script>
+</body>
+<script src="script.js"></script>
+</html>
+
+
